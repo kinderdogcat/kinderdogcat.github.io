@@ -35,13 +35,13 @@
     /* ⭐ 포스트잇 */
       .postit{
       width:240px;
-      padding:22px 18px;
+      padding:16px 14px;
       border-radius:12px;
       box-shadow:0 10px 40px var(--shadow), 0 2px 6px rgba(0,0,0,0.06);
       transition:box-shadow .18s ease;
       position:relative;
       overflow:hidden;
-      min-height:200px;
+      min-height:180px;
       background:linear-gradient(180deg,var(--yellow),var(--yellow-dark));
     }
 
@@ -49,12 +49,22 @@
       box-shadow:0 18px 50px rgba(15,23,42,0.24);
     }
 
+    /* 포스트잇 ID (우측 하단) */
+    .postit-id{
+      position:absolute;
+      right:10px;
+      bottom:8px;
+      font-size:11px;
+      color:#6b5a00;
+      opacity:0.6;
+    }
+
     /* 핀 */
     .pin{
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      top: -8px;
+      top: -2px;
 
       /* 원 배경 제거 → 이모지만 표시됨 */
       background: none;
@@ -127,32 +137,43 @@
       }
     }
 
-    function renderCards(data) {
-      const board = document.getElementById("board");
-      board.innerHTML = "";
+function renderCards(data) {
+  const board = document.getElementById("board");
+  board.innerHTML = "";
 
-      data.forEach((item) => {
-        const card = document.createElement("article");
-        card.className = `postit`;
+  data.forEach((item) => {
+    const card = document.createElement("article");
+    card.className = `postit`;
 
-        card.innerHTML = `
-          <div class="pin">📌</div>
+    card.innerHTML = `
+      <div class="pin">📌</div>
 
-          <h1>${item.nick_name ?? ""}</h1>
+      <h1>${item.nick_name ?? ""}</h1>
 
-          <p>📄 ${item.specification ?? ""}</p>
-          <p>📝 ${item.memo ?? ""}</p>
+      <p>📄 ${item.specification ?? ""}</p>
+      <p>📝 ${item.memo ?? ""}</p>
 
-          ${
-            item.link
-              ? `<div class="meta"><span>🔗</span> <span>${item.link}</span></div>`
-              : ""
-          }
-        `;
+      ${
+        item.link
+          ? `
+            <div class="meta">
+              <span>🔗</span>
+              <span>
+                <a href="${item.link}" target="_blank" rel="noopener noreferrer">
+                  ${item.link}
+                </a>
+              </span>
+            </div>
+          `
+          : ""
+      }
 
-        board.appendChild(card);
-      });
-    }
+          <div class="postit-id">#${item.id}</div>
+    `;
+
+    board.appendChild(card);
+  });
+}
 
     loadData();
   </script>
