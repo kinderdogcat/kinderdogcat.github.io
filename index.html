@@ -18,6 +18,7 @@
     body{
       margin:0;
       background:linear-gradient(180deg,var(--bg),#eef2f7);
+      overflow-x: auto; /* ⭐ 화면 축소로 인한 겹침 방지 */
     }
 
     /* ⭐ 고정형 3열 포스트잇 보드 */
@@ -26,24 +27,22 @@
       margin: 40px auto;
       display: grid;
       grid-template-columns: 250px 250px 250px; /* 완전 고정 */
-      column-gap: 25px;
-      row-gap: 25px;
+      column-gap: 35px;
+      row-gap: 35px;
       justify-content: center;
     }
 
     /* ⭐ 포스트잇 */
-    .postit{
-      width: 250px;
-      min-height: 180px;
-      padding: 20px 16px;
-      border-radius: 12px;
-      background: linear-gradient(180deg, var(--yellow), var(--yellow-dark));
-
+      .postit{
+      width:250px;
+      padding:22px 18px;
+      border-radius:12px;
       box-shadow:0 10px 40px var(--shadow), 0 2px 6px rgba(0,0,0,0.06);
-
-      position: relative;
-      overflow: hidden;
-      transition: box-shadow .18s ease;
+      transition:box-shadow .18s ease;
+      position:relative;
+      overflow:hidden;
+      min-height:200px;
+      background:linear-gradient(180deg,var(--yellow),var(--yellow-dark));
     }
 
     .postit:hover{
