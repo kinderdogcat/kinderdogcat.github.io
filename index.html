@@ -108,6 +108,13 @@
 </head>
 
 <body>
+  <h2 id="title" style="
+  text-align:center;
+  margin-top:25px;
+  font-size:22px;
+  font-weight:700;
+  color:#333;"></h2>
+
   <main class="board" id="board"></main>
 
   <script>
@@ -131,11 +138,26 @@
         const data = await res.json();
         if (!Array.isArray(data)) return;
 
+        // ⭐ 타입 카운트
+        const dogCount = data.filter(item => item.type === "dog").length;
+        const catCount = data.filter(item => item.type === "cat").length;
+
+        updateTitle(dogCount, catCount);
+
         renderCards(data);
       } catch (err) {
         console.error("Fetch Error:", err);
       }
     }
+
+function updateTitle(count1, count2) {
+  const titleEl = document.getElementById("title");
+
+  const today = new Date();
+  const dateText = today.toISOString().slice(0, 10);
+
+  titleEl.textContent = `강아지 ${count1} 마리, 고양이 ${count2}마리 등록 (${dateText})`;
+}
 
 function renderCards(data) {
   const board = document.getElementById("board");
