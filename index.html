@@ -21,31 +21,28 @@
       overflow-x: auto; /* ⭐ 화면 축소로 인한 겹침 방지 */
     }
 
-    /* 전체 레이아웃이 축소되지 않고 자연스럽게 줄 맞춰짐 */
+    /* ⭐ 고정형 3열 포스트잇 보드 */
     .board{
-      width: 100%;
-      max-width: 1100px;
+      width: 900px; /* 250×3 + 25×2 */
       margin: 40px auto;
-
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 35px;                /* ← 겹침 해결 핵심 */
-      justify-items: center;    /* 카드 가운데 정렬 */
+      grid-template-columns: 250px 250px 250px; /* 완전 고정 */
+      column-gap: 35px;
+      row-gap: 45px;
+      justify-content: center;
     }
 
-    /* 포스트잇(겹침 방지 위해 고정폭 제거) */
-    .postit{
-      width: 300px;
-      padding: 26px 22px;
-
-      border-radius: 12px;
-      background: linear-gradient(180deg,var(--yellow),var(--yellow-dark));
-      box-shadow: 0 10px 40px var(--shadow), 0 2px 6px rgba(0,0,0,0.06);
-
-      transition: box-shadow .18s ease;
-      position: relative;
-      overflow: hidden;
-      min-height: 200px;
+    /* ⭐ 포스트잇 */
+      .postit{
+      width:240px;
+      padding:22px 18px;
+      border-radius:12px;
+      box-shadow:0 10px 40px var(--shadow), 0 2px 6px rgba(0,0,0,0.06);
+      transition:box-shadow .18s ease;
+      position:relative;
+      overflow:hidden;
+      min-height:200px;
+      background:linear-gradient(180deg,var(--yellow),var(--yellow-dark));
     }
 
     .postit:hover{
@@ -57,7 +54,7 @@
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      top: -6px;
+      top: -8px;
 
       /* 원 배경 제거 → 이모지만 표시됨 */
       background: none;
