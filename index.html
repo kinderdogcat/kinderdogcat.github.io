@@ -85,14 +85,20 @@
       box-shadow:0 18px 50px rgba(15,23,42,0.24);
     }
 
-    /* 포스트잇 ID */
-    .postit-id{
-      position:absolute;
-      right:10px;
-      bottom:8px;
-      font-size:11px;
-      color:#6b5a00;
-      opacity:0.6;
+    /* 포스트잇 하단 정보 바 */
+    .postit-footer{
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 8px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      font-size: 11px;
+      color: #6b5a00;
+      opacity: 0.6;
     }
 
     /* 핀 이모지 */
@@ -239,7 +245,10 @@
               : ""
           }
 
-          <div class="postit-id">#${item.id}</div>
+          <div class="postit-footer">
+            <span>${item.valid_month}월 분양</span>
+            <span>#${item.id}</span>
+          </div>
         `;
 
         board.appendChild(card);
