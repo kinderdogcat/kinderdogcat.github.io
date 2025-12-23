@@ -1,1 +1,22 @@
-name
+name: Delete Sale Data Older Than 30 Days
+
+on:
+  schedule:
+    # 매일 새벽 3시 (UTC 기준 → 한국시간 정오 12시)
+    - cron: '0 3 * * *'
+  workflow_dispatch:   # 수동 실행 버튼
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Delete sale records older than 30 days
+        run: |
+          DATE=$(date -u -d '30 days ago' +%Y-%m-%dT%H:%M:%SZ)
+
+          echo "Deleting records older than: $DATE"
+
+          curl -X DELETE "${{ secrets.SUPABASE_URL }}/rest/v1/sale?created_at=lt.${DATE}" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
